@@ -20,9 +20,14 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        // 'user' => [
+        //     'identityClass' => 'app\models\User',
+        //     'enableAutoLogin' => true,
+        // ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\User', // Adjust this according to your User model
             'enableAutoLogin' => true,
+            'loginUrl' => ['site/login'], // This defines the login URL
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

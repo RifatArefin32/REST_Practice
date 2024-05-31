@@ -13,6 +13,8 @@ use yii\grid\GridView;
 $this->title = 'Tasks';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+
 <div class="task-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -25,15 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'title',
             'body:ntext',
-            'created_by',
-            'created_at',
+            // 'created_by',
+            // 'created_at',
             //'updated_at',
             //'updated_by',
             [

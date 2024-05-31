@@ -21,9 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-                <?= $form->field($model, 'password')->passwordInput() ?>
-                <?= $form->field($model, 'password_repeat')->passwordInput() ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Enter username', ['style'=>'white-space:nowrap'])->hint('must be unique') ?>
+                <?= $form->field($model, 'password')->passwordInput()->label('Enter Password', ['style' => 'white-space: nowrap;']) -> hint('at least 8 character') ?>
+                <?= $form->field($model, 'password_repeat')->passwordInput() -> label('Repeat your password', ['style' => 'white-space: nowrap']) ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

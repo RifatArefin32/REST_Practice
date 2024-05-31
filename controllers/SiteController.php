@@ -10,6 +10,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\TaskSearch;
 
 class SiteController extends Controller
 {
@@ -52,6 +53,17 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'action'=> [
+                'class' => AccessControl::className(),
+                'only' => ['index'], // Apply this filter only to the 'index' action
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['@'], // Allow only authenticated users
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -62,7 +74,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new TaskSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+
+       // return $this->render('index');
     }
 
     /**
@@ -79,6 +100,9 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
+            // return $this->render('site/index', [
+            //     'model' => $model,
+            // ]);
         }
 
         $model->password = '';
